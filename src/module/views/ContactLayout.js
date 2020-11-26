@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import ThemeInsideLayout from './ThemeInsideLayout';
 import Image from '../img/background3.jpg';
@@ -8,6 +8,7 @@ import Typography from '../component/Typography';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import emailjs from 'emailjs-com';
 
 const styles = (theme) => ({
     background: {
@@ -66,6 +67,50 @@ const styles = (theme) => ({
 
 const ContactLayout = props => {
     const { classes } = props;
+
+    const [fName, setfName] = useState('');
+    const [fEmail, setfEmail] = useState('');
+    const [fTitle, setfTitle] = useState('');
+    const [fMessage, setfMessage] = useState('');
+    const [double, setDouble] = useState(false);
+    const [chgword, setChgword] = useState('Send');
+
+    const clearValue = () => {
+        setfName('');
+        setfEmail('');
+        setfTitle('');
+        setfMessage('');
+    }
+
+    const submitValue = () => {
+
+        if(fName==''||fEmail==''||fTitle==''||fMessage==''){
+            alert('All field are mandatory. Please fill up.')
+
+        }else{
+            setDouble(true);
+            setChgword('Sending');
+
+            const frmdetails = {
+                'Name' : fName,
+                'Email' : fEmail,
+                'Title' : fTitle,
+                'Message' : fMessage
+            }
+
+            emailjs.send('service_vlg0mnp', 'template_1qdk5sx', frmdetails, 'user_jlh7yiYNK2GdWKlf8pq5m')
+            .then((result) => {
+                alert(result.text);
+                setDouble(false);
+                setChgword('Send')
+            }, (error) => {
+                alert(error.text);
+            });
+
+            //JSON.stringify(frmdetails) *convert to json string
+        }
+    }
+
     return (
         <ThemeInsideLayout>
             <h1>Contact</h1>
@@ -109,19 +154,19 @@ const ContactLayout = props => {
                             </Box>
                             <form  noValidate autoComplete="off">
                                 <div className={classes.div}>
-                                    <TextField id="standard-basic" label="Name" />
-                                    <TextField id="standard-basic" label="Email" /> 
+                                    <TextField id="standard-basic" label="Name" value={fName} onChange={e => setfName(e.target.value)} disabled={double}/>
+                                    <TextField id="standard-basic" label="Email" value={fEmail} onChange={e => setfEmail(e.target.value)} disabled={double}/> 
                                     
                                 </div>
                                 <div className={classes.div}> 
-                                    <TextField id="standard-basic" label="Title" fullWidth/>   
+                                    <TextField id="standard-basic" label="Title" value={fTitle} fullWidth onChange={e => setfTitle(e.target.value)} disabled={double}/>   
                                 </div>
                                 <div className={classes.div}>
-                                    <TextField id="standard-basic" label="Message" fullWidth multiline rows={3} variant="outlined"/>
-                                    <Button variant="contained" color="secondary">
-                                        Send
+                                    <TextField id="standard-basic" label="Message" value={fMessage} fullWidth multiline rows={3} variant="outlined" onChange={e => setfMessage(e.target.value)} disabled={double}/>
+                                    <Button variant="contained" color="secondary" onClick={submitValue} disabled={double}>
+                                        {chgword}
                                     </Button>
-                                    <Button variant="contained" color="secondary">
+                                    <Button variant="contained" color="secondary" onClick={clearValue}>
                                         Cancel
                                     </Button>
                                 </div>
