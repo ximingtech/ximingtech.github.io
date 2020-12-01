@@ -73,20 +73,20 @@ const ContactLayout = props => {
     const [fEmail, setfEmail] = useState('');
     const [fTitle, setfTitle] = useState('');
     const [fMessage, setfMessage] = useState('');
-    const [double, setDouble] = useState(true);
+    const [double, setDouble] = useState(false);
     const [chgword, setChgword] = useState('Send');
-    //const [recap, setRecap] = useState('');
+    const [recap, setRecap] = useState('');
 
     const recaptchaRef = React.createRef();
     const reacptchaKey = process.env.REACT_APP_RECAPTCHA_KEY;
     //const reacptchaKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
-    
-    const onChange = (value) => {
-        console.log("Captcha value:", value);
 
-        setDouble(false);
+    // const onChange = (value) => {
+    //     console.log("Captcha value:", value);
 
-      }
+    //     setDouble(false);
+
+    //   }
 
     const clearValue = () => {
         setfName('');
@@ -96,33 +96,39 @@ const ContactLayout = props => {
     }
 
     const submitValue = () => {
+        console.log(recap)
+        if(recap!==''){
 
-        if(fName===''||fEmail===''||fTitle===''||fMessage===''){
-            alert('All field are mandatory. Please fill up.')
+            if(fName===''||fEmail===''||fTitle===''||fMessage===''){
+                alert('All field are mandatory. Please fill up.')
+    
+            }else{
+                
+                setDouble(true);
+                setChgword('Sending');
+    
+                const frmdetails = {
+                    'Name' : fName,
+                    'Email' : fEmail,
+                    'Title' : fTitle,
+                    'Message' : fMessage
+                }
+    
+                emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, frmdetails, process.env.REACT_APP_EMAILJS_USER_KEY)
+                .then((result) => {
+                    alert(result.text);
+                    setDouble(false);
+                    setChgword('Send')
+                }, (error) => {
+                    alert(error.text);
+                });
+    
+                //JSON.stringify(frmdetails) *convert to json string
 
-        }else{
-            
-            setDouble(true);
-            setChgword('Sending');
-
-            const frmdetails = {
-                'Name' : fName,
-                'Email' : fEmail,
-                'Title' : fTitle,
-                'Message' : fMessage
             }
 
-            emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, frmdetails, process.env.REACT_APP_EMAILJS_USER_KEY)
-            .then((result) => {
-                alert(result.text);
-                setDouble(false);
-                setChgword('Send')
-            }, (error) => {
-                alert(error.text);
-            });
-
-            //JSON.stringify(frmdetails) *convert to json string
-
+        }else{
+            alert("Please tick recaptcha checkbox.")
         }
     }
 
@@ -188,7 +194,7 @@ const ContactLayout = props => {
                                 <div><ReCAPTCHA
                                     ref={recaptchaRef}
                                     sitekey={reacptchaKey}
-                                    onChange={onChange}
+                                    onChange={e => setRecap(e.target.value)}
                                     /></div>
                             </form>
                         </div>
