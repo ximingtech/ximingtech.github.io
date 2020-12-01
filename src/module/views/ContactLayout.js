@@ -78,6 +78,7 @@ const ContactLayout = props => {
     const [recap, setRecap] = useState('');
 
     const recaptchaRef = React.createRef();
+    const reacptchaKey = process.env.REACT_APP_RECAPTCHA_KEY;
 
     // const onChange = (value) => {
     //     console.log("Captcha value:", value);
@@ -112,7 +113,7 @@ const ContactLayout = props => {
                     'Message' : fMessage
                 }
 
-                emailjs.send('service_vlg0mnp', 'template_1qdk5sx', frmdetails, 'user_jlh7yiYNK2GdWKlf8pq5m')
+                emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, frmdetails, process.env.REACT_APP_EMAILJS_USER_KEY)
                 .then((result) => {
                     alert(result.text);
                     setDouble(false);
@@ -189,7 +190,7 @@ const ContactLayout = props => {
                                 </div>
                                 <div><ReCAPTCHA
                                     ref={recaptchaRef}
-                                    sitekey="6LdqEe4ZAAAAAMY4CS16SY0OoKYnKa3mckEqaI9J"
+                                    sitekey={reacptchaKey}
                                     onChange={e => setRecap(e.target.value)}
                                     /></div>
                             </form>
