@@ -118,6 +118,7 @@ const ContactLayout = props => {
                         alert(result.text);
                         setDouble(false);
                         setChgword('Send')
+                        clearValue();
                     }, (error) => {
                         alert(error.text);
                     });
