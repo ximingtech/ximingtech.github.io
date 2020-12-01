@@ -97,12 +97,11 @@ const ContactLayout = props => {
 
     const submitValue = () => {
         console.log(recap)
-        
             if(fName===''||fEmail===''||fTitle===''||fMessage===''){
                 alert('All field are mandatory. Please fill up.')
     
             }else{
-                if(recap!==null || recap!==''){
+                if(recap!==null && recap!==''){
                     setDouble(true);
                     setChgword('Sending');
         
@@ -128,7 +127,6 @@ const ContactLayout = props => {
                     alert("Please tick recaptcha checkbox.")
                 }
             }
-
         
     }
 
