@@ -81,12 +81,12 @@ const ContactLayout = props => {
     const reacptchaKey = process.env.REACT_APP_RECAPTCHA_KEY;
     //const reacptchaKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
 
-    // const onChange = (value) => {
-    //     console.log("Captcha value:", value);
+    const onChange = (value) => {
+        console.log("Captcha value:", value);
 
-    //     setDouble(false);
+        setRecap(value)
 
-    //   }
+      }
 
     const clearValue = () => {
         setfName('');
@@ -194,7 +194,7 @@ const ContactLayout = props => {
                                 <div><ReCAPTCHA
                                     ref={recaptchaRef}
                                     sitekey={reacptchaKey}
-                                    onChange={e => setRecap(e.target.value)}
+                                    onChange={onChange}
                                     /></div>
                             </form>
                         </div>
