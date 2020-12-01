@@ -84,7 +84,7 @@ const ContactLayout = props => {
     const onChange = (value) => {
         setRecap(value)
 
-      }
+    }
 
     const clearValue = () => {
         setfName('');
@@ -133,10 +133,12 @@ const ContactLayout = props => {
             <div className={classes.root}>
                 <Card>
                     <CardContent className={classes.cardContentContainer}>
+
                         <iframe id="gmap_canvas" width="100%" height="100%"
                             src="https://maps.google.com/maps?q=taman%20ria%20jaya&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                             frameborder="0" scrolling="no" marginheight="0" marginwidth="0" className={classes.iframe}>
                         </iframe>
+
                         <div className={classes.border}>
                             <Box className={classes.div3} border={1} borderRadius={16} borderColor="secondary.main">
                                 <div className={classes.div2}>

@@ -9,6 +9,8 @@ import Image from '../img/background.jpg';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { Collapse } from '@material-ui/core';
 // import UserIcon from '../component/UserIcon';
+import LinkMUI from '@material-ui/core/Link';
+
 const styles = (theme) => ({
   background: {
     backgroundImage: `url(${Image})`,
@@ -33,7 +35,8 @@ const styles = (theme) => ({
   },
   goDown:{
     fontSize: '4rem',
-    marginTop: 15
+    marginTop: 15,
+    color: 'White'
   },
   container:{
     display:'flex',
@@ -78,7 +81,11 @@ const ThemeLayout = props => {
         </Link>
       </div> */}
       <div className={classes.container}>
-        <ExpandMoreIcon className={classes.goDown}/>
+        <LinkMUI
+          href="#resume"
+          >
+          <ExpandMoreIcon className={classes.goDown} />
+        </LinkMUI>
       </div>
       </Collapse>
     </ThemeInsideLayout>
