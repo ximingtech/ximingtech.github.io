@@ -97,39 +97,38 @@ const ContactLayout = props => {
 
     const submitValue = () => {
         console.log(recap)
-        if(recap!==''){
-
+        
             if(fName===''||fEmail===''||fTitle===''||fMessage===''){
                 alert('All field are mandatory. Please fill up.')
     
             }else{
-                
-                setDouble(true);
-                setChgword('Sending');
-    
-                const frmdetails = {
-                    'Name' : fName,
-                    'Email' : fEmail,
-                    'Title' : fTitle,
-                    'Message' : fMessage
+                if(recap!==null){
+                    setDouble(true);
+                    setChgword('Sending');
+        
+                    const frmdetails = {
+                        'Name' : fName,
+                        'Email' : fEmail,
+                        'Title' : fTitle,
+                        'Message' : fMessage
+                    }
+        
+                    emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, frmdetails, process.env.REACT_APP_EMAILJS_USER_KEY)
+                    .then((result) => {
+                        alert(result.text);
+                        setDouble(false);
+                        setChgword('Send')
+                    }, (error) => {
+                        alert(error.text);
+                    });
+        
+                    //JSON.stringify(frmdetails) *convert to json string
+                }else{
+                    alert("Please tick recaptcha checkbox.")
                 }
-    
-                emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, frmdetails, process.env.REACT_APP_EMAILJS_USER_KEY)
-                .then((result) => {
-                    alert(result.text);
-                    setDouble(false);
-                    setChgword('Send')
-                }, (error) => {
-                    alert(error.text);
-                });
-    
-                //JSON.stringify(frmdetails) *convert to json string
-
             }
 
-        }else{
-            alert("Please tick recaptcha checkbox.")
-        }
+        
     }
 
     return (
