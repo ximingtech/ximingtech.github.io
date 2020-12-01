@@ -102,7 +102,7 @@ const ContactLayout = props => {
                 alert('All field are mandatory. Please fill up.')
     
             }else{
-                if(recap!==null){
+                if(recap!==null || recap!==''){
                     setDouble(true);
                     setChgword('Sending');
         
