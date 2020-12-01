@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import emailjs from 'emailjs-com';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const styles = (theme) => ({
     background: {
@@ -74,6 +75,13 @@ const ContactLayout = props => {
     const [fMessage, setfMessage] = useState('');
     const [double, setDouble] = useState(false);
     const [chgword, setChgword] = useState('Send');
+    const [recap, setRecap] = useState('');
+
+    const recaptchaRef = React.createRef();
+
+    // const onChange = (value) => {
+    //     console.log("Captcha value:", value);
+    //   }
 
     const clearValue = () => {
         setfName('');
@@ -84,30 +92,39 @@ const ContactLayout = props => {
 
     const submitValue = () => {
 
-        if(fName==''||fEmail==''||fTitle==''||fMessage==''){
+        if(fName===''||fEmail===''||fTitle===''||fMessage===''){
             alert('All field are mandatory. Please fill up.')
 
         }else{
-            setDouble(true);
-            setChgword('Sending');
+            alert(recap);
+            if(recap===''){
+                alert('Please click the recaptcha')
+            }else{
+                //alert('yea u clicked it')
 
-            const frmdetails = {
-                'Name' : fName,
-                'Email' : fEmail,
-                'Title' : fTitle,
-                'Message' : fMessage
+                setDouble(true);
+                setChgword('Sending');
+
+                const frmdetails = {
+                    'Name' : fName,
+                    'Email' : fEmail,
+                    'Title' : fTitle,
+                    'Message' : fMessage
+                }
+
+                emailjs.send('service_vlg0mnp', 'template_1qdk5sx', frmdetails, 'user_jlh7yiYNK2GdWKlf8pq5m')
+                .then((result) => {
+                    alert(result.text);
+                    setDouble(false);
+                    setChgword('Send')
+                }, (error) => {
+                    alert(error.text);
+                });
+
+                //JSON.stringify(frmdetails) *convert to json string
+
             }
 
-            emailjs.send('service_vlg0mnp', 'template_1qdk5sx', frmdetails, 'user_jlh7yiYNK2GdWKlf8pq5m')
-            .then((result) => {
-                alert(result.text);
-                setDouble(false);
-                setChgword('Send')
-            }, (error) => {
-                alert(error.text);
-            });
-
-            //JSON.stringify(frmdetails) *convert to json string
         }
     }
 
@@ -170,6 +187,11 @@ const ContactLayout = props => {
                                         Cancel
                                     </Button>
                                 </div>
+                                <div><ReCAPTCHA
+                                    ref={recaptchaRef}
+                                    sitekey="6LdqEe4ZAAAAAMY4CS16SY0OoKYnKa3mckEqaI9J"
+                                    onChange={e => setRecap(e.target.value)}
+                                    /></div>
                             </form>
                         </div>
                     </CardContent>
