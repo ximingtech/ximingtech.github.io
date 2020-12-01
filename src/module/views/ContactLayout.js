@@ -82,8 +82,6 @@ const ContactLayout = props => {
     //const reacptchaKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
 
     const onChange = (value) => {
-        console.log("Captcha value:", value);
-
         setRecap(value)
 
       }
@@ -96,7 +94,6 @@ const ContactLayout = props => {
     }
 
     const submitValue = () => {
-        console.log(recap)
             if(fName===''||fEmail===''||fTitle===''||fMessage===''){
                 alert('All field are mandatory. Please fill up.')
     
