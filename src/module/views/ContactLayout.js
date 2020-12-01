@@ -97,7 +97,6 @@ const ContactLayout = props => {
             alert('All field are mandatory. Please fill up.')
 
         }else{
-            alert(recap);
             if(recap===''){
                 alert('Please click the recaptcha')
             }else{
