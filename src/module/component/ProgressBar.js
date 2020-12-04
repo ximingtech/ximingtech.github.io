@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 const ProgressBar = props => {
+
     return (
         <Box display="flex" alignItems="center">
             <Box minWidth={70}>

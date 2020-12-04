@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar } from '@material-ui/core';
 import Toolbar, { styles as toolbarStyles } from '../component/Toolbar';
 import {Home, CastForEducation, ContactMail, Work} from '@material-ui/icons'
 import clsx from 'clsx';
 import LinkMUI from '@material-ui/core/Link';
-import {Link} from 'react-router-dom'
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+//import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
 
     appbar:{
         background:"none",
+        transition:".5s"
+    },
+    appbarScroll:{
+        background:"Black",
+        transition:"1s"
     },
     title: {
         fontSize: 24,
@@ -38,16 +44,37 @@ const useStyles = makeStyles((theme) => ({
       linkSecondary: {
         color: theme.palette.secondary.main,
       },
-
 }))
 
 const AppBarV2 = () =>{
     const classes = useStyles();
+    const trigger = useScrollTrigger({
+      disableHysteresis: true,
+      threshold: 100
+    });
+
+    const [home,SetHome] = useState(<Home/>);
+    const [resume,SetResume] = useState(<CastForEducation/>);
+    const [portfolio,SetPortfolio] = useState(<Work/>);
+    const [contact,SetContact] = useState(<ContactMail/>);
+
+    const hoverEnter = value => e =>{
+      value === 'home' ? SetHome('home') : 
+      value === 'resume' ? SetResume('resume') : 
+      value === 'portfolio' ? SetPortfolio('portfolio') : 
+      value === 'contact' ? SetContact('contact') : console.log('nothing');      
+    }
+
+    const hoverLeave = value => e =>{
+      value === 'home' ? SetHome(<Home/>) : 
+      value === 'resume' ? SetResume(<CastForEducation/>) : 
+      value === 'portfolio' ? SetPortfolio(<Work/>) : 
+      value === 'contact' ? SetContact(<ContactMail/>) : console.log('nothing');  
+    }
 
     return(
-
         <div>
-            <AppBar className={classes.appbar} elevation={0}>
+            <AppBar className={`${trigger === false ? classes.appbar : classes.appbarScroll}`} elevation={0}>
                 <Toolbar className={classes.toolbar}>
                     <LinkMUI
                     variant="h6"
@@ -65,8 +92,10 @@ const AppBarV2 = () =>{
                         underline="none"
                         className={classes.rightLink}
                         href="#home"
+                        onMouseEnter={hoverEnter('home')}
+                        onMouseLeave={hoverLeave('home')}
                         >
-                            <Home />
+                          {home}
                         </LinkMUI>
                
      
@@ -75,8 +104,10 @@ const AppBarV2 = () =>{
                         underline="none"
                         className={clsx(classes.rightLink)}
                         href="#resume"
+                        onMouseEnter={hoverEnter('resume')}
+                        onMouseLeave={hoverLeave('resume')}
                         >
-                            <CastForEducation />
+                          {resume}
                         </LinkMUI>
  
 
@@ -85,8 +116,10 @@ const AppBarV2 = () =>{
                         underline="none"
                         className={clsx(classes.rightLink)}
                         href="#portfolio"
+                        onMouseEnter={hoverEnter('portfolio')}
+                        onMouseLeave={hoverLeave('portfolio')}
                         >
-                            <Work />
+                          {portfolio}
                         </LinkMUI>
 
                         <LinkMUI
@@ -94,8 +127,10 @@ const AppBarV2 = () =>{
                         underline="none"
                         className={clsx(classes.rightLink, classes.linkSecondary)}
                         href="#contact"
+                        onMouseEnter={hoverEnter('contact')}
+                        onMouseLeave={hoverLeave('contact')}
                         >
-                            <ContactMail />
+                          {contact}
                         </LinkMUI>
                     </div>
                 </Toolbar>

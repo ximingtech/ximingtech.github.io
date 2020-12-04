@@ -21,6 +21,7 @@ const styles = (theme) => ({
         minWidth: '85vw',
         diplay: 'flex',
         flexDirection: 'row',
+        marginTop:'10%'
         //height: '50vh',
       },
     cardContentContainer: {
@@ -129,8 +130,9 @@ const ContactLayout = props => {
 
     return (
         <ThemeInsideLayout>
-            <h1>Contact</h1>
+            
             <div className={classes.root}>
+                <h1>Contact</h1>
                 <Card>
                     <CardContent className={classes.cardContentContainer}>
 
