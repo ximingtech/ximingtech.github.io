@@ -13,6 +13,7 @@ import ProgressBar from '../component/ProgressBar';
 import Web from '@material-ui/icons/Web';
 import Mobile from '@material-ui/icons/PhoneAndroid';
 import Code from '@material-ui/icons/Code';
+import { Hidden } from '@material-ui/core';
 //import UserIcon from '../component/UserIcon';
 const styles = (theme) => ({
     background: {
@@ -22,8 +23,8 @@ const styles = (theme) => ({
     root: {
         position: 'relative',
         minWidth: '85vw',
+        maxHeight: '85vh',
         marginTop: '15%',
-        //height: '50vh',
       },
     title: {
         fontSize: 14,

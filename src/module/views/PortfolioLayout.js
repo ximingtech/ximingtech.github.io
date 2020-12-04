@@ -2,7 +2,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import Image from '../img/background2.jpg';
 import Typography from '@material-ui/core/Typography';
-import ThemeInsideLayout from './ThemeInsideLayout';
+import ThemeInsideLayout from './PortfolioInsideLayout';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
@@ -13,12 +13,18 @@ import TimelineDot from '@material-ui/lab/TimelineDot';
 import School from '@material-ui/icons/School';
 import Work from '@material-ui/icons/BusinessCenter';
 import Paper from '@material-ui/core/Paper';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const styles = (theme) => ({
     background: {
         backgroundImage: `url(${Image})`,
         backgroundPosition: 'center',
     },
+
+    root: {
+        position: 'relative',
+
+      },
  
     cardRoot:{
         width: '40vw',
@@ -32,8 +38,19 @@ const styles = (theme) => ({
     cardContainer:{
         display: 'flex',
         flexDirection: 'row',
+        //flexWrap: 'wrap',
+        justifyContent: 'center'
         //alignItems: 'center'
     },
+    cardContainerMobile:{
+        display: 'flex',
+        flexDirection: 'column',
+        //flexWrap: 'wrap',
+        justifyContent: 'center',
+
+        //alignItems: 'center'
+    },
+    
     paper: {
         padding: '6px 16px',
       },
@@ -44,9 +61,12 @@ const styles = (theme) => ({
 
 const PortfolioLayout = props => {
     const { classes } = props;
+    const matches = useMediaQuery('(max-width:1100px)');
+    
     return (
         <ThemeInsideLayout backgroundClassName={classes.background}>
-            <div className={classes.cardContainer}>
+            <div className={classes.root}>
+            <div className={`${matches ? classes.cardContainerMobile : classes.cardContainer}`}>
                 <div className={classes.cardRoot}> 
                     <Timeline align="alternate">
                         <TimelineItem>
@@ -160,6 +180,7 @@ const PortfolioLayout = props => {
                         </TimelineItem>
                     </Timeline>
                 </div>
+            </div>
             </div>
         </ThemeInsideLayout>
     )
