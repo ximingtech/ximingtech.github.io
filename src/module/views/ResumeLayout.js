@@ -5,6 +5,7 @@ import Typography from '../component/Typography';
 import ThemeInsideLayout from './ThemeInsideLayout';
 import Card from '@material-ui/core/Card';
 import Image from '../img/background2.jpg';
+import Avatar from '../img/giphy.gif';
 //import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import MIcon from '../component/MIcon';
@@ -37,8 +38,10 @@ const styles = (theme) => ({
         marginTop:'70px'
     },
     userIcon: {
-        backgroundImage: `url("https://images.unsplash.com/photo-1594007759138-855170ec8dc0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80")`,
+        //backgroundImage: `url("https://images.unsplash.com/photo-1594007759138-855170ec8dc0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80")`,
+        backgroundImage: `url(${Avatar})`,
         backgroundPosition: 'center',
+        backgroundSize: '100% 100%',
         borderRadius: '50%',
         width:'140px',
         height:'140px',
