@@ -79,8 +79,9 @@ const ContactLayout = props => {
     const [recap, setRecap] = useState('');
 
     const recaptchaRef = React.createRef();
-    const reacptchaKey = process.env.REACT_APP_RECAPTCHA_KEY;
+    //const reacptchaKey = process.env.REACT_APP_RECAPTCHA_KEY;
     //const reacptchaKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+    const reacptchaKey = "6LdqEe4ZAAAAAMY4CS16SY0OoKYnKa3mckEqaI9J";
 
     const onChange = (value) => {
         setRecap(value)
@@ -138,7 +139,7 @@ const ContactLayout = props => {
 
                         <iframe id="gmap_canvas" width="100%" height="100%"
                             src="https://maps.google.com/maps?q=taman%20ria%20jaya&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0" className={classes.iframe}>
+                            frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" className={classes.iframe}>
                         </iframe>
 
                         <div className={classes.border}>
@@ -168,7 +169,7 @@ const ContactLayout = props => {
                                         Freelance
                                     </Typography>
                                     <Typography variant='subtitle1'>
-                                        Unavailable
+                                        Available
                                     </Typography>
                                 </div>
                             </Box>
@@ -190,11 +191,16 @@ const ContactLayout = props => {
                                         Cancel
                                     </Button>
                                 </div>
-                                <div><ReCAPTCHA
+                                <ReCAPTCHA
                                     ref={recaptchaRef}
                                     sitekey={reacptchaKey}
                                     onChange={onChange}
-                                    /></div>
+                                    />
+                                {/* <div><ReCAPTCHA
+                                    ref={recaptchaRef}
+                                    sitekey={reacptchaKey}
+                                    onChange={onChange}
+                                    /></div> */}
                             </form>
                         </div>
                     </CardContent>

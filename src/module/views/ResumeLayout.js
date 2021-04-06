@@ -111,7 +111,7 @@ const ResumeLayout = props => {
                         <Web/> Web | <Mobile/> Mobile | <Code/> Fullstack Developer
                     </Typography>
                     <Typography color="inherit" align="center" variant="body1"  marked="center" className={classes.h5}>
-                        Hi, I am XMTech, and you can call me Xi Ming. I am a Full Stack Developer with 2 years of experience. 
+                        Hi, I am XMTech, and you can call me Xi Ming. I am a Full Stack Developer with 3 years of experience. 
                                     In my current job at Xend company, I had developed various of project to help the company 
                                     grow their business and on-time rate over the two years. Now I am very eager to meet the challenge of developing new territories.
                     </Typography>
